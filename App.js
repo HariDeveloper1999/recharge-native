@@ -24,7 +24,7 @@ export default function App() {
         }}
        
        >
-           <Stack.Screen name="Login" component={Login} options={{title:"Login Here"}}/>
+           {/* <Stack.Screen name="Login" component={Login} options={{title:"Login Here"}}/> */}
            <Stack.Screen name="Signup" component={Signup} options={{title:"Signup Here"}}/>
            <Stack.Screen name="Recharge" component={Recharge} options={{title:"All Recharge"}}/>
            <Stack.Screen name="Plans" component={Plans} options={{title:"Recharge Plans"}}/>
