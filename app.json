@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Recharge-App",
-    "slug": "Recharge-App",
+    "name": "Hari-All-Recharge-App",
+    "slug": "Hari-All-Recharge-App",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,16 +15,23 @@
       "**/*"
     ],
     "ios": {
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.haribabuperla.HariAllRechargeApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f2eb962e-d67f-40f5-ad4d-c86eb8bafe3a"
+      }
     }
   }
 }
