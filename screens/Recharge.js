@@ -1,6 +1,6 @@
-import { Text,StyleSheet,View } from "react-native"
+import { Text,StyleSheet,View,FlatList } from "react-native"
 import DropDown from "../components/dropDown"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Input from "../components/Input";
 import Btn from "../components/btn";
 import { Alert } from "react-native";
@@ -14,14 +14,17 @@ export default function Recharge({route,navigation}){
     const [listActive,setListActive]=useState(false);
     const [selectedval,setSelectedVal]=useState('');
     const [amount,setAmount]=useState("");
-    const [mobNum,setMobnum]=useState("")
+    const [mobNum,setMobnum]=useState("");
+    const [rechargeData,setrechargeData]=useState([]);
+    const [bal,setBal]=useState(5000)
+    
 
     const pressHandler=(value)=>{
         setSelectedVal(value)
      }
-
   
   const inputHandler=(value)=>{
+   
     setAmount(value)
   }
   const mobHandler=(value)=>{
@@ -33,11 +36,32 @@ export default function Recharge({route,navigation}){
     }
 
     const btnPressHandler=()=>{
-        if(selectedval && mobNum.length == 10 && (amount|| route?.params?.amount)){
+        let amountVal = parseInt(amount)
+      
+        if(selectedval && mobNum.length == 10  &&(amount|| route?.params?.amount)){
+            if(amountVal <= bal){
+            
             Alert.alert(
                 `Your ${mobNum} Sim is Recharged Successfully`, 
                  `You Recharged plan amount is ${amount || route?.params?.amount}`,
             )
+            
+            setrechargeData((prev)=>[...prev,{num:mobNum,status:"Success",sim:selectedval}])
+
+            setAmount("");
+            setSelectedVal('');
+            setMobnum("")
+            setListActive(true)
+            setBal(bal-amountVal)
+            }
+            else{
+                Alert.alert(
+                    "Please Check balance"
+                )
+
+            }
+          
+            
 
           
 
@@ -45,6 +69,7 @@ export default function Recharge({route,navigation}){
             Alert.alert(
                 "Please provide valid data"
             )
+            setrechargeData((prev)=>[...prev,{num:mobNum,status:"Failed",sim:selectedval}])
         }
         
     }
@@ -52,10 +77,32 @@ export default function Recharge({route,navigation}){
         navigation.navigate("Plans")
     
     }
+    useEffect(()=>{
+      if(route?.params?.amount){
+        setAmount(route.params.amount)
+      }
+    },[route])
 
+    const renderDetails=(item)=>{
+        return(
+            <>
+            <View style={[styles.statusContainer,item.status=="Failed" && styles.statusBg]}>
+            <Text style={styles.stText}>{item.sim}</Text>
+            <Text style={styles.stText}>{item.num}</Text>
+            <Text style={styles.stText}>{item.status}</Text>
+            </View>
+            </>
+        )
+
+    }
 
     return(
+        <>
         <View style={styles.container}>
+            <View style={styles.balanceContainer}>
+              <Text style={styles.balance}>Balance:{bal}</Text>
+            </View>
+           
        <DropDown
         pressHandler={pressHandler}
         selectedval={selectedval}
@@ -79,7 +126,7 @@ export default function Recharge({route,navigation}){
       placeholder="Enter  Amount"
       changeHandler={inputHandler}
       keyboardType="numeric"
-      value={route?.params?.amount? route.params.amount:amount}
+      value={amount}
 
       />
      
@@ -97,16 +144,60 @@ export default function Recharge({route,navigation}){
       
       />
       </View>
+      <View>
+   
+      </View>
+      
+
+    
 
 
       </View>
+    { rechargeData.length > 0 &&
+      <View style={styles.flatContainer}>
+      <Text style={styles.rcgHead}>Recharge History</Text>
+      <FlatList
+      data={rechargeData}
+      keyExtractor={(item)=>console.log("it123",item)}
+      renderItem={(item)=>renderDetails(item.item)}
+      
+      
+      />
+      </View>
+}
+     
+      </>
     )
 }
 
 const styles=StyleSheet.create({
     container:{
+        flex:3,
         marginVertical:20,
-        padding:20
+        padding:18,
+      
+    },
+    balanceContainer:{
+        flexDirection:'row',
+        justifyContent:"flex-end",
+        fontSize:20,
+        
+    },
+    balance:{
+        fontSize:20,
+        color:'blue'
+    },
+   
+  
+    rcgHead:{
+        color:"#fcba03",
+        textDecorationLine:"underline",
+        fontSize:18,
+        fontWeight:'bold',
+        fontStyle:'italic',
+        
+        
+       
     },
   
     inputField:{
@@ -135,6 +226,42 @@ const styles=StyleSheet.create({
     btnContainer:{
         marginTop:30,
         flexDirection:"row"
+    },
+    customerContainer:{
+        position:'relative',
+    } ,  
+    customerText:{
+        position:'absolute',
+        top:290,
+        backgroundColor:'#3a9cde',
+        color:'white',
+        width:"100%" ,
+        paddingVertical:20,
+        textAlign:"center",
+        fontSize:20  
+
+    },
+    statusContainer:{
+    
+        flexDirection:'row',
+        justifyContent:'space-around',
+        backgroundColor:'green',
+        borderRadius:5,
+        paddingVertical:5,
+        marginTop:20,
+    
+    },
+    stText:{
+      color:'white'
+    },
+    statusBg:{
+        backgroundColor:"red"
+    },
+    flatContainer:{
+        backgroundColor:'#a748fa',
+        padding:10,
+        borderRadius:10,
+        flex:1
     }
  
   })
