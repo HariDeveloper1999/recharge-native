@@ -6,9 +6,7 @@ export default function DropDown({data,placeholder,listActive,listActivehandler,
 
    const[textValue,setTextValue]=useState("");
    const [filterData,setFilterData]=useState([])
-   useEffect(()=>{
-      listActivehandler(true)
-   },[])
+  
 
    useEffect(()=>{
       if(textValue.length > 0){
@@ -57,14 +55,15 @@ return(
        onPressIn={()=>listActivehandler(true)}
         
       /> */}
-      <TextInput value={textValue} onChangeText={changeHandler} style={styles.text}  placeholder={placeholder} />
-
+      
+      <Text style={styles.text} onPress={()=>{ listActivehandler(true)}}>{selectedval||placeholder}</Text>
    </View>
    
    
   {
     listActive &&
-    <View style={styles.dataContainer}>
+    <View style={styles.dataContainer} onPress={()=>{listActivehandler(false)}}>
+      <TextInput value={textValue} onChangeText={changeHandler} style={styles.search}   placeholder={"Search"} />
         <FlatList
            data={textValue.length > 0 && filterData?.length > 0 ? filterData : OPERATOR_DATA}
            keyExtractor={(item)=>item.id}
@@ -120,6 +119,10 @@ const styles=StyleSheet.create({
         backgroundColor:'#25272a',
         borderRadius:10
         
+    },
+    search:{
+      backgroundColor:"#32a879",
+      color:"white"
     }
    
 

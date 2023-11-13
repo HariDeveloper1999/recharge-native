@@ -21,6 +21,7 @@ export default function Recharge({route,navigation}){
 
     const pressHandler=(value)=>{
         setSelectedVal(value)
+        setListActive(false)
      }
   
   const inputHandler=(value)=>{
@@ -37,6 +38,7 @@ export default function Recharge({route,navigation}){
 
     const btnPressHandler=()=>{
         let amountVal = parseInt(amount)
+        let uniId=Math.ceil(Math.random()*100)
       
         if(selectedval && mobNum.length == 10  &&(amount|| route?.params?.amount)){
             if(amountVal <= bal){
@@ -46,12 +48,11 @@ export default function Recharge({route,navigation}){
                  `You Recharged plan amount is ${amount || route?.params?.amount}`,
             )
             
-            setrechargeData((prev)=>[...prev,{num:mobNum,status:"Success",sim:selectedval}])
+            setrechargeData((prev)=>[...prev,{id:uniId,num:mobNum,status:"Success",sim:selectedval}])
 
             setAmount("");
             setSelectedVal('');
             setMobnum("")
-            setListActive(true)
             setBal(bal-amountVal)
             }
             else{
@@ -69,7 +70,7 @@ export default function Recharge({route,navigation}){
             Alert.alert(
                 "Please provide valid data"
             )
-            setrechargeData((prev)=>[...prev,{num:mobNum,status:"Failed",sim:selectedval}])
+            setrechargeData((prev)=>[...prev,{id:uniId,num:mobNum,status:"Failed",sim:selectedval}])
         }
         
     }
@@ -158,7 +159,7 @@ export default function Recharge({route,navigation}){
       <Text style={styles.rcgHead}>Recharge History</Text>
       <FlatList
       data={rechargeData}
-      keyExtractor={(item)=>console.log("it123",item)}
+      keyExtractor={(item)=>item.id}
       renderItem={(item)=>renderDetails(item.item)}
       
       
@@ -213,34 +214,14 @@ const styles=StyleSheet.create({
     
   
     },
-    plansContainer:{
-        position:"absolute",
-        top:140,
-        left:300,
-        fontSize:20,
-    },
-    planText:{
-        color:'blue'
-
-    },
+   
+   
     btnContainer:{
-        marginTop:30,
+        marginTop:10,
         flexDirection:"row"
     },
-    customerContainer:{
-        position:'relative',
-    } ,  
-    customerText:{
-        position:'absolute',
-        top:290,
-        backgroundColor:'#3a9cde',
-        color:'white',
-        width:"100%" ,
-        paddingVertical:20,
-        textAlign:"center",
-        fontSize:20  
-
-    },
+    
+   
     statusContainer:{
     
         flexDirection:'row',
