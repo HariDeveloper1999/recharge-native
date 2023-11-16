@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Input from "../components/Input";
 import Btn from "../components/btn";
 import { Alert } from "react-native";
+import { OPERATOR_DATA, DTH_DATA } from "../constants/data";
 
 
 
@@ -17,7 +18,6 @@ export default function Recharge({route,navigation}){
     const [mobNum,setMobnum]=useState("");
     const [rechargeData,setrechargeData]=useState([]);
     const [bal,setBal]=useState(5000)
-    
 
     const pressHandler=(value)=>{
         setSelectedVal(value)
@@ -44,7 +44,7 @@ export default function Recharge({route,navigation}){
             if(amountVal <= bal){
             
             Alert.alert(
-                `Your ${mobNum} Sim is Recharged Successfully`, 
+                `Your ${mobNum} is Recharged Successfully`, 
                  `You Recharged plan amount is ${amount || route?.params?.amount}`,
             )
             
@@ -99,7 +99,8 @@ export default function Recharge({route,navigation}){
 
     return(
         <>
-        <View style={styles.container}>
+        <View style={styles.bg} >
+          <View style={styles.container}>
             <View style={styles.balanceContainer}>
               <Text style={styles.balance}>Balance:{bal}</Text>
             </View>
@@ -110,11 +111,12 @@ export default function Recharge({route,navigation}){
         placeholder="Select Operator"
         listActive={listActive}
         listActivehandler={listActivehandler}
+        listData={route.name == "Mobile Recharge" ? OPERATOR_DATA:DTH_DATA}
       />
      
      <Input
       styleInput={styles.inputField}
-      placeholder="Enter Mobile Number"
+      placeholder={route.name == "Mobile Recharge"?"Enter Mobile Number":'Enter DTH Number'}
       changeHandler={mobHandler}
       keyboardType="numeric"
       value={mobNum}
@@ -151,10 +153,8 @@ export default function Recharge({route,navigation}){
       
 
     
-
-
       </View>
-    { rechargeData.length > 0 &&
+      { rechargeData.length > 0 &&
       <View style={styles.flatContainer}>
       <Text style={styles.rcgHead}>Recharge History</Text>
       <FlatList
@@ -166,6 +166,9 @@ export default function Recharge({route,navigation}){
       />
       </View>
 }
+
+      </View>
+  
      
       </>
     )
@@ -173,10 +176,14 @@ export default function Recharge({route,navigation}){
 
 const styles=StyleSheet.create({
     container:{
-        flex:3,
+       
         marginVertical:20,
         padding:18,
       
+    },
+    bg:{
+      flex:3,
+      backgroundColor:'#cdde3a'
     },
     balanceContainer:{
         flexDirection:'row',

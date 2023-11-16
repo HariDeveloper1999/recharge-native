@@ -1,8 +1,7 @@
 import { View,TextInput, FlatList,StyleSheet,Text, Pressable, ScrollView } from "react-native";
-import { OPERATOR_DATA } from "../constants/data";
 import { useEffect, useState } from "react";
 
-export default function DropDown({data,placeholder,listActive,listActivehandler,pressHandler,selectedval}){
+export default function DropDown({listData,placeholder,listActive,listActivehandler,pressHandler,selectedval}){
 
    const[textValue,setTextValue]=useState("");
    const [filterData,setFilterData]=useState([])
@@ -11,7 +10,7 @@ export default function DropDown({data,placeholder,listActive,listActivehandler,
    useEffect(()=>{
       if(textValue.length > 0){
          let converrtedValue=textValue.toLowerCase();
-        let data= OPERATOR_DATA.filter((item)=>item.value.includes(converrtedValue))
+        let data= listData?.filter((item)=>item.value.includes(converrtedValue))
         
         setFilterData(data?.length > 0 && data)
 
@@ -65,7 +64,7 @@ return(
     <View style={styles.dataContainer} onPress={()=>{listActivehandler(false)}}>
       <TextInput value={textValue} onChangeText={changeHandler} style={styles.search}   placeholder={"Search"} />
         <FlatList
-           data={textValue.length > 0 && filterData?.length > 0 ? filterData : OPERATOR_DATA}
+           data={textValue.length > 0 && filterData?.length > 0 ? filterData :listData}
            keyExtractor={(item)=>item.id}
            renderItem={(item)=>renderItem(item)}
         

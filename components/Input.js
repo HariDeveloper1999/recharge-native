@@ -19,8 +19,8 @@ export default function Input(props){
         <>
           {
             type == "password" &&
-            <Pressable style={styles.absStyle} onPress={iconHandler}>
-            <Ionicons name={isSecure ? "eye-off-outline" :"eye-outline"} size={30} />
+            <Pressable style={{position:'relative'}}  onPress={iconHandler}>
+            <Ionicons style={styles.absStyle} name={isSecure ? "eye-off-outline" :"eye-outline"} size={30} />
             </Pressable>
           }
         </>
@@ -42,9 +42,9 @@ const styles=StyleSheet.create({
 
   },
   absStyle:{
-    position:'relative',
+    position:'absolute',
     top:-40,
-    left:300,
+    left:330,
   
     
   }

@@ -44,6 +44,28 @@ export const OPERATOR_DATA=[
   }
 ]
 
+export const DTH_DATA=[
+  {
+    id:0,
+    label:"SUN DTH",
+    value:'sun dth'
+
+  },
+  {
+    id:1,
+    label:"Airtel DTH",
+    value:'airtel dth'
+
+  },
+  {
+    id:2,
+    label:"Videocon",
+    value:"videocon"
+
+  },
+ 
+]
+
 export const RECHARGE_PLANS=[
   {
     id:0,
