@@ -1,7 +1,9 @@
-import { Text,View,StyleSheet } from "react-native";
+import { Text,View,StyleSheet,Dimensions} from "react-native";
 import Home from "../components/home";
+const {height} = Dimensions.get('window')
 
 function Login() {
+  console.log("123",height/27)
   return( 
     <>
   <View>
@@ -18,17 +20,17 @@ export default Login;
 const styles=StyleSheet.create({
 
   customerContainer:{
-      position:'relative',
+     marginTop:height/27
   } ,  
   customerText:{
-      position:'absolute',
-      top:150,
+      
+     
       backgroundColor:'#3a9cde',
       color:'white',
       width:"100%" ,
       paddingVertical:20,
       textAlign:"center",
-      fontSize:20  
+      fontSize:18  
 
   },
  

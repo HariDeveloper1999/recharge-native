@@ -1,29 +1,31 @@
-import { TextInput,StyleSheet,View ,Pressable} from "react-native"
+import { TextInput,StyleSheet,View ,Pressable,Dimensions} from "react-native"
 import {Ionicons} from "@expo/vector-icons"
 import { useState } from "react"
+const { width, height } = Dimensions.get('window');
+
 export default function Input(props){
     const{changeHandler,value,type,placeholder,keyboardType,isSecure,iconHandler,styleInput}=props
-    
+ 
     return(
     <>
         <TextInput 
           type={type}
           value={value}
-          onChangeText={(event)=>changeHandler(event,placeholder)}
+          onChangeText={(event)=> changeHandler(event,placeholder)}
           placeholder={placeholder}
           style={styleInput? styleInput:styles.inputClass}
-          keyboardType={keyboardType ? keyboardType:"default" }
+          keyboardType={keyboardType ? keyboardType:"default"}
           secureTextEntry={isSecure}
         
         />
-        <>
+        <View style={{position:'relative'}}>
           {
             type == "password" &&
-            <Pressable style={{position:'relative'}}  onPress={iconHandler}>
+            <Pressable   onPress={iconHandler}>
             <Ionicons style={styles.absStyle} name={isSecure ? "eye-off-outline" :"eye-outline"} size={30} />
             </Pressable>
           }
-        </>
+        </View>
         </>
           
         
@@ -43,8 +45,8 @@ const styles=StyleSheet.create({
   },
   absStyle:{
     position:'absolute',
-    top:-40,
-    left:330,
+     top:-40,
+    left:width/1.3,
   
     
   }
