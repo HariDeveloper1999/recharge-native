@@ -46,7 +46,7 @@ const styles=StyleSheet.create({
   absStyle:{
     position:'absolute',
      top:-40,
-    left:width/1.3,
+    left:300,
   
     
   }

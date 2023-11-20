@@ -3,15 +3,14 @@ import Home from "../components/home";
 const {height} = Dimensions.get('window')
 
 function Login() {
-  console.log("123",height/27)
   return( 
     <>
   <View>
      <Home isLogin={true}/>
   </View>
-     <View style={styles.customerContainer}>
+     {/* <View style={styles.customerContainer}>
      <Text style={styles.customerText}>Contact us : developer.haribabuperla@gmail.com</Text>
-   </View>
+   </View> */}
    </>
   )
 }
@@ -20,7 +19,7 @@ export default Login;
 const styles=StyleSheet.create({
 
   customerContainer:{
-     marginTop:height/27
+    
   } ,  
   customerText:{
       
