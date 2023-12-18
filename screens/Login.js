@@ -1,4 +1,4 @@
-import { Text,View,StyleSheet,Dimensions} from "react-native";
+import { Text,View,StyleSheet,Dimensions,KeyboardAvoidingView} from "react-native";
 import Home from "../components/home";
 
 const devHeight=Dimensions.get('window').height;
@@ -7,7 +7,7 @@ function Login() {
 
   console.log("devHeight",devHeight)
   return( 
-    <>
+    <KeyboardAvoidingView>
   <View>
      <Home isLogin={true}/>
   </View>
@@ -16,8 +16,9 @@ function Login() {
      <Text style={styles.customerText}>Contact us : developer.haribabuperla@gmail.com</Text>
    </View>
 
+
   
-   </>
+   </KeyboardAvoidingView>
   )
 }
 
@@ -27,7 +28,7 @@ const styles=StyleSheet.create({
   customerContainer:{
 
     position:"absolute",
-     bottom:0,
+     top:"105%",
      width:'100%'
     
   } ,  
