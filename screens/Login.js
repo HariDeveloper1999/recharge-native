@@ -5,17 +5,17 @@ const devHeight=Dimensions.get('window').height;
 function Login() {
  
 
-  console.log("devHeight",devHeight/7)
+  console.log("devHeight",devHeight)
   return( 
     <>
   <View>
      <Home isLogin={true}/>
   </View>
-  <View style={{position:'relative'}}>
+ 
   <View style={styles.customerContainer}>
      <Text style={styles.customerText}>Contact us : developer.haribabuperla@gmail.com</Text>
    </View>
-  </View>
+
   
    </>
   )
@@ -25,11 +25,11 @@ export default Login;
 const styles=StyleSheet.create({
 
   customerContainer:{
-    //  flex:1,
-    //  justifyContent:'flex-end'
-    position:"absolute",
-     bottom:-(devHeight/7),
-     width:'100%'
+     flex:1,
+     justifyContent:'flex-end'
+    // position:"absolute",
+    //  bottom:-(devHeight/7),
+    //  width:'100%'
     
   } ,  
   customerText:{
