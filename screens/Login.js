@@ -11,10 +11,11 @@ function Login() {
   <View>
      <Home isLogin={true}/>
   </View>
- 
+
   <View style={styles.customerContainer}>
      <Text style={styles.customerText}>Contact us : developer.haribabuperla@gmail.com</Text>
    </View>
+
 
 
   
@@ -28,7 +29,7 @@ const styles=StyleSheet.create({
   customerContainer:{
 
     position:"absolute",
-     top:"105%",
+   bottom:"-18%",
      width:'100%'
     
   } ,  
