@@ -1,16 +1,22 @@
 import { Text,View,StyleSheet,Dimensions} from "react-native";
 import Home from "../components/home";
-const {height} = Dimensions.get('window')
 
+const devHeight=Dimensions.get('window').height;
 function Login() {
+ 
+
+  console.log("devHeight",devHeight/7)
   return( 
     <>
   <View>
      <Home isLogin={true}/>
   </View>
-     {/* <View style={styles.customerContainer}>
+  <View style={{position:'relative'}}>
+  <View style={styles.customerContainer}>
      <Text style={styles.customerText}>Contact us : developer.haribabuperla@gmail.com</Text>
-   </View> */}
+   </View>
+  </View>
+  
    </>
   )
 }
@@ -19,6 +25,11 @@ export default Login;
 const styles=StyleSheet.create({
 
   customerContainer:{
+    //  flex:1,
+    //  justifyContent:'flex-end'
+    position:"absolute",
+     bottom:-(devHeight/7),
+     width:'100%'
     
   } ,  
   customerText:{
@@ -29,7 +40,10 @@ const styles=StyleSheet.create({
       width:"100%" ,
       paddingVertical:20,
       textAlign:"center",
-      fontSize:18  
+      fontSize:18,
+      borderWidth:2,
+      borderColor:'orange' ,
+      borderStyle:'dotted'
 
   },
  
