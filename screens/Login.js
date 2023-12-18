@@ -12,9 +12,9 @@ function Login() {
      <Home isLogin={true}/>
   </View>
  
-  <View style={styles.customerContainer}>
+  {/* <View style={styles.customerContainer}>
      <Text style={styles.customerText}>Contact us : developer.haribabuperla@gmail.com</Text>
-   </View>
+   </View> */}
 
   
    </>
@@ -25,13 +25,14 @@ export default Login;
 const styles=StyleSheet.create({
 
   customerContainer:{
-     flex:1,
-     justifyContent:'flex-end'
-    // position:"absolute",
-    //  bottom:-(devHeight/7),
-    //  width:'100%'
+    //  flex:1,
+    //  justifyContent:'flex-end'
+    position:"absolute",
+     bottom:-(devHeight/7),
+     width:'100%'
     
   } ,  
+
   customerText:{
       
      
