@@ -3,9 +3,7 @@ import Home from "../components/home";
 
 const devHeight=Dimensions.get('window').height;
 function Login() {
- 
 
-  console.log("devHeight",devHeight)
   return( 
     <KeyboardAvoidingView>
   <View>
