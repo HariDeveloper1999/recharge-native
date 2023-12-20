@@ -71,7 +71,7 @@ export const RECHARGE_PLANS=[
     id:0,
     amount:"199",
     validity:"28 Days",
-    planType:"silver",
+    planType:"Silver",
     description:"1GB Data per 28 days and unlimited calls"
   },
   {

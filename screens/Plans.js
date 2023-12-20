@@ -3,17 +3,16 @@ import { RECHARGE_PLANS } from "../constants/data";
 export default function Plans({navigation}){
 
     const cardPresshandler=(item)=>{
-         navigation.navigate("Recharge",{amount:item.amount})
+        navigation.navigate("Recharge",{amount:item});
     }
      
     const renderDetails=(item)=>{
         return(
-            <Pressable style={styles.card} onPress={()=>cardPresshandler(item)}>
-               
-                    <Text style={styles.planAmount}>{`₹${item.amount}`}</Text>
-                    <Text style={styles.planText}>{`Validity:${item.validity}`}</Text>
-                    <Text style={styles.planText}>{`Type:${item.planType}`}</Text>
-                    <Text style={styles.planText}>{`Offer:${item.description}`}</Text>
+            <Pressable style={styles.card} onPress={()=>cardPresshandler(this.item)}>
+                <Text style={styles.planAmount}>{`₹${item.amount}`}</Text>
+                <Text style={styles.planText}>{`Validity:${item.validity}`}</Text>
+                <Text style={styles.planText}>{`Type:${item.planType}`}</Text>
+                <Text style={styles.planText}>{`Offer:${item.description}`}</Text>
             </Pressable>
         )
     }
